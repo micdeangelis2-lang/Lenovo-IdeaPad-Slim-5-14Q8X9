@@ -2,7 +2,7 @@
 # Esegui questo script SUL LENOVO prima di formattare (o copia la cartella Drivers risultante in iso_builder\uup_pkg\Drivers)
 
 $ErrorActionPreference = 'Stop'
-$dest = Join-Path $PSScriptRoot "uup_pkg\Drivers"
+$dest = Join-Path $PSScriptRoot "uup_pkg\Drivers\ALL"
 New-Item -ItemType Directory -Force -Path $dest | Out-Null
 
 Write-Host "============================================================" -ForegroundColor Cyan

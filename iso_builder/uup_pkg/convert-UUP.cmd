@@ -398,7 +398,8 @@ set "MetadataESD=!_UUP!\%uups_esd1%"&set "_flg=%edition1%"&set "arch=%arch1%"&se
 goto :MAINMENU
 
 :MULTIMENU
-if %AutoStart% equ 1 (set AIO=1&set WIMFILE=install.wim&goto :ISO)
+set "MetadataESD=!_UUP!\%uups_esd1%"&set "_flg=%edition1%"&set "arch=%arch1%"&set "langid=%langid1%"&set "editionid=%edition1%"&set "_oName=%_oname1%"&set "_Srvr=%_ESDSrv1%"
+if %AutoStart% equ 1 (set "_tag= AIO"&set "_ta2=AIO"&set AIO=1&set WIMFILE=install.wim&goto :ISO)
 if %AutoStart% equ 2 (set AIO=1&set WIMFILE=install.esd&goto :ISO)
 if %AutoStart% equ 3 (set AIO=1&set WIMFILE=install.wim&goto :Single)
 if %AutoStart% equ 4 (set AIO=1&set WIMFILE=install.esd&goto :Single)

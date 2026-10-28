@@ -30,13 +30,13 @@ curl.exe -s -L "https://download.lenovo.com/consumer/mobiles/pucn55ww.txt" -o (J
 
 # 3. Download & Extract Driver Packs
 $packages = @(
-    @{ Name = "WinPE_Core"; Url = "https://download.lenovo.com/pccbbs/mobiles/tp_8cxg4_pe11_202507.exe" },
-    @{ Name = "Fingerprint"; Url = "https://download.lenovo.com/pccbbs/mobiles/n42gf12w.exe" },
-    @{ Name = "WMI_ACPI"; Url = "https://download.lenovo.com/pccbbs/mobiles/n42ab08w.exe" },
-    @{ Name = "Power_Battery"; Url = "https://download.lenovo.com/pccbbs/mobiles/n1fupa3w.exe" },
-    @{ Name = "Base_Utility"; Url = "https://download.lenovo.com/pccbbs/mobiles/r19vu23w.exe" },
-    @{ Name = "Qualcomm_Integrated"; Url = "https://download.lenovo.com/pccbbs/mobiles/n42qq22w.exe" },
-    @{ Name = "SCCM_25H2_202609"; Url = "https://download.lenovo.com/pccbbs/mobiles/tp_t14s_gen6_21n1-21n2_w11_25_202609.exe" }
+    @{ Name = "WinPE\Core"; Url = "https://download.lenovo.com/pccbbs/mobiles/tp_8cxg4_pe11_202507.exe" },
+    @{ Name = "ALL\Fingerprint"; Url = "https://download.lenovo.com/pccbbs/mobiles/n42gf12w.exe" },
+    @{ Name = "ALL\WMI_ACPI"; Url = "https://download.lenovo.com/pccbbs/mobiles/n42ab08w.exe" },
+    @{ Name = "ALL\Power_Battery"; Url = "https://download.lenovo.com/pccbbs/mobiles/n1fupa3w.exe" },
+    @{ Name = "ALL\Base_Utility"; Url = "https://download.lenovo.com/pccbbs/mobiles/r19vu23w.exe" },
+    @{ Name = "ALL\Qualcomm_Integrated"; Url = "https://download.lenovo.com/pccbbs/mobiles/n42qq22w.exe" },
+    @{ Name = "ALL\SCCM_25H2_202609"; Url = "https://download.lenovo.com/pccbbs/mobiles/tp_t14s_gen6_21n1-21n2_w11_25_202609.exe" }
 )
 
 foreach ($pkg in $packages) {
