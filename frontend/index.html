@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lenovo IdeaPad Slim 5 14Q8X9 — Checkup Usato & Periferiche</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Fullscreen Dead-Pixel / OLED Uniformity Overlay -->
+  <div id="pixel-overlay" class="pixel-overlay hidden" tabindex="0">
+    <div id="pixel-hud" class="pixel-hud">
+      <strong>TEST DISPLAY / DEAD PIXEL / BURN-IN OLED</strong>
+      <span id="pixel-mode-label">Colore: Rosso Puro</span>
+      <p>Clicca o premi <kbd>SPAZIO</kbd> / <kbd>FRECCIA DX</kbd> per cambiare schermata • Premi <kbd>ESC</kbd> per uscire</p>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-tag">LENOVO DIAGNOSTICS</span>
+      <h1>IdeaPad Slim 5 14Q8X9 <span class="sub">Snapdragon X Plus • Checkup Usato</span></h1>
+    </div>
+    <div class="topbar-actions">
+      <div class="live-pill" id="live-pill">
+        <span class="dot"></span>
+        <span id="live-cpu">CPU: --%</span> •
+        <span id="live-ram">RAM: --%</span> •
+        <span id="live-bat">BAT: --%</span>
+      </div>
+      <button id="btn-refresh" class="btn btn-secondary">Riscansiona Hardware</button>
+      <button id="btn-export" class="btn btn-primary">Esporta Report JSON</button>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="tab-overview">1. Stato PC & Batteria (Usato)</button>
+    <button class="tab" data-tab="tab-peripherals">2. Gestione Dispositivi & Driver</button>
+    <button class="tab" data-tab="tab-display-kb">3. Test Schermo, Tastiera & Touchpad</button>
+    <button class="tab" data-tab="tab-cam-audio">4. Test Webcam, Microfono & Casse</button>
+    <button class="tab" data-tab="tab-checklist">5. Checklist Porte & Scocca</button>
+  </nav>
+
+  <main class="container">
+    <!-- TAB 1: OVERVIEW & USED LAPTOP AUDIT -->
+    <section id="tab-overview" class="tab-panel active">
+      <div class="hero-verdict">
+        <div class="score-ring-wrap">
+          <div id="score-badge" class="score-badge">--</div>
+          <div class="score-caption">Indice Salute Usato</div>
+        </div>
+        <div class="verdict-alerts">
+          <h2>Esito Ispezione Automatica</h2>
+          <div id="alerts-list" class="alerts-list">
+            <div class="loading-skeleton">Scansione WMI, Batteria e SMART NVMe in corso...</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <!-- Card Sistema & Snapdragon -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Sistema, BIOS & Snapdragon X Plus</h3>
+            <span class="badge" id="arch-badge">--</span>
+          </div>
+          <dl class="spec-list" id="spec-system"></dl>
+        </div>
+
+        <!-- Card Batteria (Fondamentale per Usato) -->
+        <div class="card highlight-card">
+          <div class="card-header">
+            <h3>Salute Batteria & Cicli di Carica</h3>
+            <span class="badge" id="bat-verdict-badge">--</span>
+          </div>
+          <div class="battery-meter-wrap">
+            <div class="battery-bar-label">
+              <span>Capacita' Reale vs Fabbrica</span>
+              <strong id="bat-health-pct">--%</strong>
+            </div>
+            <div class="progress-bar">
+              <div id="bat-health-fill" class="progress-fill" style="width: 0%"></div>
+            </div>
+          </div>
+          <dl class="spec-list" id="spec-battery"></dl>
+        </div>
+
+        <!-- Card SSD NVMe & SMART -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Archiviazione SSD & Stato SMART</h3>
+            <span class="badge" id="disk-verdict-badge">--</span>
+          </div>
+          <div id="spec-disks"></div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header">
+            <h3>Display, GPU Adreno & RAM LPDDR5x</h3>
+          </div>
+          <dl class="spec-list" id="spec-gpu-ram"></dl>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Sicurezza, TPM 2.0 & Licenza OEM Windows</h3>
+          </div>
+          <dl class="spec-list" id="spec-security"></dl>
+        </div>
+      </div>
+
+      <!-- Originality & Replaced Parts Audit -->
+      <div class="card highlight-card" style="margin-top: 1.25rem;">
+        <div class="card-header">
+          <div>
+            <h3>Verifica Originalita' Componenti (Controllo Ricambi / Parti Sostituite)</h3>
+            <p class="muted">Confronto automatico tra i seriali/fornitori hardware rilevati (SMBIOS, Batteria FRU, NVMe OEM, Pannello EDID) e le specifiche di fabbrica Lenovo IdeaPad Slim 5 14Q8X9 (Type 83HL).</p>
+          </div>
+          <span class="badge badge-info" id="orig-summary-badge">Analisi OEM</span>
+        </div>
+        <div id="originality-table-wrap"></div>
+      </div>
+    </section>
+
+    <!-- TAB 2: DEVICE MANAGER & SUBSYSTEMS -->
+    <section id="tab-peripherals" class="tab-panel">
+      <div class="card" style="margin-bottom: 1.25rem;">
+        <div class="card-header">
+          <h3>Anomalie Gestione Dispositivi (Codici Errore PnP != 0)</h3>
+          <span class="badge" id="pnp-err-count">0 errori</span>
+        </div>
+        <div id="pnp-errors-box"></div>
+      </div>
+
+      <div class="grid-2" id="subsystems-grid">
+        <!-- Populated dynamically: NPU, Wi-Fi 7/BT, Camera, Audio, Biometrics, USB4, Sensors -->
+      </div>
+    </section>
+
+    <!-- TAB 3: INTERACTIVE DISPLAY, KEYBOARD & TOUCHPAD -->
+    <section id="tab-display-kb" class="tab-panel">
+      <div class="grid-2">
+        <!-- Display Tester -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Test Schermo OLED / IPS (Dead Pixel & Burn-in)</h3>
+            <span class="badge badge-info" id="screen-res-badge">--</span>
+          </div>
+          <p class="muted">
+            Il Lenovo IdeaPad Slim 5 14Q8X9 monta spesso un pannello <strong>14" WUXGA (1920x1200) OLED</strong> o IPS.
+            Avvia il test a tutto schermo per verificare che non ci siano <strong>pixel bruciati</strong>, aloni (burn-in della barra applicazioni) o strisce verticali.
+          </p>
+          <div class="btn-row">
+            <button id="btn-start-pixel" class="btn btn-primary">Avvia Test Tutto Schermo</button>
+            <button id="btn-mark-screen-ok" class="btn btn-success">Segna Schermo OK</button>
+          </div>
+          <div class="color-swatches" id="quick-swatches">
+            <button data-color="#000000" title="Nero Puro">Nero</button>
+            <button data-color="#ffffff" title="Bianco Puro">Bianco</button>
+            <button data-color="#ff0000" title="Rosso">Rosso</button>
+            <button data-color="#00ff00" title="Verde">Verde</button>
+            <button data-color="#0000ff" title="Blu">Blu</button>
+            <button data-color="#555555" title="Grigio 33% (Test Uniformita' OLED)">Grigio OLED</button>
+          </div>
+        </div>
+
+        <!-- Touchpad & Multi-touch Tester -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Test Touchpad Precision, Click & Scroll</h3>
+            <button id="btn-clear-pad" class="btn btn-sm">Pulisci Traccia</button>
+          </div>
+          <p class="muted">Muovi il dito nell'area sottostante, prova il <strong>Click Sinistro</strong>, <strong>Click Destro</strong> e lo <strong>Scroll a 2 dita</strong>.</p>
+          <canvas id="touchpad-canvas" width="520" height="190"></canvas>
+          <div class="pad-badges">
+            <span id="pad-left" class="pill">Click SX: Da testare</span>
+            <span id="pad-right" class="pill">Click DX: Da testare</span>
+            <span id="pad-middle" class="pill">Click Centrale: Da testare</span>
+            <span id="pad-scroll" class="pill">Scroll 2 Dita: Da testare</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Keyboard Matrix Tester -->
+      <div class="card" style="margin-top: 1.25rem;">
+        <div class="card-header">
+          <div>
+            <h3>Test Tastiera Interattivo (Verifica Tasti Usurati o Bloccati)</h3>
+            <p class="muted">Premi tutti i tasti del portatile: si illumineranno di <strong>ambra</strong> mentre premuti e resteranno <strong>verdi</strong> una volta verificati.</p>
+          </div>
+          <div class="kb-stats">
+            <span id="kb-counter" class="badge badge-info">0 tasti verificati</span>
+            <button id="btn-reset-kb" class="btn btn-sm">Reset Tastiera</button>
+          </div>
+        </div>
+        <div class="last-key-banner" id="last-key-banner">
+          Ultimo tasto premuto: <strong id="last-key-code">Nessuno</strong>
+        </div>
+        <div class="keyboard-wrapper" id="keyboard-grid"></div>
+      </div>
+    </section>
+
+    <!-- TAB 4: WEBCAM, MICROPHONE & STEREO SPEAKERS -->
+    <section id="tab-cam-audio" class="tab-panel">
+      <div class="grid-2">
+        <!-- Webcam & Privacy Shutter -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Test Webcam FHD & Otturatore Privacy</h3>
+            <span id="cam-status-badge" class="badge">In attesa</span>
+          </div>
+          <p class="muted">
+            Nota: Se vedi schermo nero ma la webcam si accende, controlla la <strong>levetta fisica Privacy Shutter</strong> sopra lo schermo del Lenovo!
+          </p>
+          <div class="video-box">
+            <video id="webcam-video" autoplay playsinline muted></video>
+            <div id="webcam-placeholder" class="video-placeholder">Premi "Avvia Webcam" per testare il sensore video</div>
+          </div>
+          <div class="btn-row">
+            <button id="btn-start-cam" class="btn btn-primary">Avvia Webcam</button>
+            <button id="btn-stop-cam" class="btn btn-secondary" disabled>Ferma Webcam</button>
+            <span id="cam-res-info" class="muted"></span>
+          </div>
+        </div>
+
+        <!-- Audio Stereo & Microfono Dual Array -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Test Altoparlanti Stereo & Microfoni</h3>
+            <span id="audio-status-badge" class="badge">Pronto</span>
+          </div>
+          <div class="audio-section">
+            <h4>1. Altoparlanti Stereo (Verifica distorsioni / membrana gracchiante)</h4>
+            <div class="btn-row">
+              <button id="btn-spk-left" class="btn btn-secondary">🔊 Cassa SINISTRA (L)</button>
+              <button id="btn-spk-right" class="btn btn-secondary">🔊 Cassa DESTRA (R)</button>
+              <button id="btn-spk-sweep" class="btn btn-primary">🎵 Sweep Bassi-Alti (200Hz-1.2kHz)</button>
+            </div>
+          </div>
+
+          <hr class="divider" />
+
+          <div class="audio-section">
+            <h4>2. Microfoni Interni (Parla o batti le mani vicino allo schermo)</h4>
+            <div class="mic-meter-box">
+              <canvas id="mic-canvas" width="480" height="80"></canvas>
+              <div class="mic-peak-row">
+                <span>Livello Voce: <strong id="mic-vol-label">0%</strong></span>
+                <span>Picco Max Raggiunto: <strong id="mic-peak-label">0%</strong></span>
+              </div>
+            </div>
+            <div class="btn-row">
+              <button id="btn-start-mic" class="btn btn-primary">🎙️ Avvia Test Microfono</button>
+              <button id="btn-stop-mic" class="btn btn-secondary" disabled>Ferma Microfono</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: PHYSICAL PORTS & USED LAPTOP CHECKLIST -->
+    <section id="tab-checklist" class="tab-panel">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3>Checklist Fisica Specifiche Lenovo IdeaPad Slim 5 14Q8X9 (Usato)</h3>
+            <p class="muted">Spunta ogni controllo manuale per generare il certificato finale di conformita' del portatile usato.</p>
+          </div>
+          <span id="checklist-progress" class="badge badge-info">0 / 10 completati</span>
+        </div>
+
+        <div class="checklist-grid" id="checklist-items">
+          <label class="check-item">
+            <input type="checkbox" data-check="usbc1" />
+            <div>
+              <strong>Porta USB-C #1 (Lato Sinistro - USB-C 3.2 Gen 2 / PD / DisplayPort)</strong>
+              <span>Collega il caricabatterie USB-C 65W nella prima porta e verifica che ricarichi senza gioco meccanico.</span>
+            </div>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" data-check="usbc2" />
+            <div>
+              <strong>Porta USB-C #2 (Lato Sinistro - Seconda porta full-function)</strong>
+              <span>Sposta il caricabatterie o una chiavetta USB-C nella seconda porta per assicurarti che il controller PD funzioni su entrambe.</span>
+            </div>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" data-check="usba" />
+            <div>
+              <strong>2x Porte USB-A 3.2 Gen 1 (Lato Destro)</strong>
+              <span>Inserisci un mouse o pennetta USB su entrambe le porte USB tradizionali (inclusa quella Always-On).</span>
+            </div>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" data-check="hdmi_sd" />
+            <div>
+              <strong>Porta HDMI 2.1 + Lettore MicroSD + Jack Cuffie 3.5mm</strong>
+              <span>Verifica che i pin interni non siano piegati e testa cuffie o scheda MicroSD se disponibili.</span>
+            </div>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" data-check="hinges" />
+            <div>
+              <strong>Cerniere Schermo e Scocca in Alluminio</strong>
+              <span>Apri e chiudi il coperchio: non devono esserci scricchiolii anomali o viti allentate sul fondo.</span>
+            </div>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" data-check="backlight" />
+            <div>
+              <strong>Retroilluminazione Tastiera (Fn + Spazio)</strong>
+              <span>Premi <kbd>Fn</kbd> + <kbd>Spazio</kbd> per verificare i 2 livelli di luce bianca dei tasti.</span>
+            </div>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" data-check="biometrics" />
+            <div>
+              <strong>Sensore Impronte Digitali / Windows Hello</strong>
+              <span>Verifica che il lettore biometrico sia rilevato e registri correttamente il dito.</span>
+            </div>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" data-check="wifi_bt" />
+            <div>
+              <strong>Connettivita' Qualcomm FastConnect 7800 (Wi-Fi 7 & Bluetooth 5.4)</strong>
+              <span>Verifica che la rete Wi-Fi 5GHz/6GHz mantenga segnale stabile e non si disconnetta sotto carico.</span>
+            </div>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" data-check="fan_noise" />
+            <div>
+              <strong>Ventola di Raffreddamento (Assenza di rumore di cuscinetti)</strong>
+              <span>Ascolta la ventola: il soffio d'aria deve essere pulito senza ticchettii metallici o vibrazioni.</span>
+            </div>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" data-check="bios_lock" />
+            <div>
+              <strong>Assenza Password BIOS / Conto Aziendale MDM (Autopilot)</strong>
+              <span>Al riavvio premendo <kbd>F2</kbd>, verifica che il BIOS Lenovo non chieda una Supervisor Password sconosciuta.</span>
+            </div>
+          </label>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

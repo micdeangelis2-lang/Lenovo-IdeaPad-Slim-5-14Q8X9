@@ -1,0 +1,139 @@
+Flash BIOS update - Flash from Operating System version for IdeaPad Slim 5 14Q8X9
+Version PUCN55WW
+Applicable OS Win11
+Installation README
+Updated Date:2026-09-11
+This package updates the basic input/output system (BIOS) on IdeaPad Slim 5 14Q8X9
+BIOS, abbreviation of basic input/output system, is integrated in ROM chip on main board, which contains the basic input/output program, system configuration information, system startup self-check and pre-setup programs. BIOS provides most basic low-level hardware operations; it is the connection between software and hardware, and interfacing window of hardware and operating system.
+
+Note: Make note of any settings you have changed in the BIOS Configuration Utility. These settings may have to be re-entered after updating the BIOS.
+
+Attention: Do not power off or restart your computer during the BIOS flashing process, which will cause serious damage and improper functioning of your computer.
+
+Print this file so that you can refer to it during the installation.
+
+Downloading the package
+=======================
+1. Click the file link to download the file from the web page.
+2. When prompted, select a drive and directory in which to save the downloaded file.
+
+Installing the package in Windows.
+======================
+Please follow bellowed step to update BIOS in Windows:
+1.  Locate the file PUCN55WW.exe that has been downloaded.
+2.  Double click the PUCN55WW.exe icon.
+3.  Follow wizard UI by making sure what BIOS to flash and flash on what platform
+4.  Finally press Install & Finish to start flashing. During the process, you are advised not to turn off the computer.
+5.  When the update finishes, the computer will automatically reboot for the changes to take effect.
+
+Important notice:
+##############################################################################################################
+Due to new function and kernel update, the BIOS Setup Utility setting will be load default after update BIOS.
+And please do not flash back BIOS to earlier.
+##############################################################################################################
+
+Updated Information:
+
+Latest Version BIOS fixed all merged issues from previous.
+
+Summary of changes
+==================
+General Information:
+
+PUCN55WW
+Webrelease
+- Enhancement to address security vulnerability LEN-205647, LEN-222545, LEN-222546, LEN-222544, LEN-220290.
+- Enhancement to address security vulnerability CVE-2026-31790, CVE-2026-28387, CVE-2026-28388, CVE-2026-28389, CVE-2026-28390, CVE-2026-31789.
+- Enhancement to address security vulnerability CVE-2026-34180, CVE-2026-34182, CVE-2026-42766, CVE-2026-42770, CVE-2026-45445, CVE-2026-45446, CVE-2026-45447, CVE-2026-7383, CVE-2026-9076.
+
+PUCN54WW
+Webrelease
+- Update Qualcomm r8600.
+
+PUCN53WW
+Webrelease
+- Enhancement to address security vulnerability CVE-2024-38798.
+
+PUCN52WW
+Webrelease
+- Enhancement to address security vulnerability CVE-2024-13176.
+
+PUCN51WW
+Webrelease
+- Update Qualcomm r7800.3.
+- Enhance USB port setting.
+- Support AI Copilot Models on 24H2.
+
+PUCN50WW
+Webrelease
+- Enhancement to address security vulnerability CVE-2024-38796, CVE-2024-55567, CVE-2025-4275.
+
+PUCN49WW
+Webrelease
+- Implement TouchPad capsule update.
+- Enhancement to address security vulnerability CVE-2025-21464, CVE-2025-21465.
+- Enhancement to address security vulnerability LEN-189478.
+
+PUCN47WW
+Webrelease
+- Improve PurwaSE.
+
+PUCN46WW
+Webrelease
+- Support PurwaSE.
+
+PUCN45WW
+Webrelease
+- Implement 6G Bitmap Enable.
+- Enhance TouchPad & Keyboard. 
+
+PUCN43WW
+Webrelease
+- Update Qualcomm r07550.1.
+- Enhancement to address security vulnerability LEN-178990.
+
+PUCN30WW
+Webrelease
+- Enhance factory process.
+
+PUCN29WW
+Webrelease
+- Update RTK PXE driver to 2.046.
+- Improve system stability.
+
+PUCN28WW
+Webrelease
+- Enhance Lenovo panel feature on LCD.
+- Support battery FUD.
+- Enhance Samsung 512G SSD stability.
+
+PUCN27WW
+Webrelease
+- Enhance Bios setup menu GUI.
+
+PUCN26WW
+Webrelease
+- Enhance the system modern standby feature with USB lan dongle.
+- Kernel CPUCP support PURWA SOC.
+- Fix OLED panel can't adjust brightness when system resume from MS.
+
+==========
+PUCN55WW Shared product ID: 402897809
+
+Trademarks
+==========
+ThinkBook, IdeaPad and IdeaCentre are registered trademarks of Lenovo.
+
+Microsoft and Windows are trademarks of Microsoft Corporation in 
+the United States, other countries, or both. Other company, product, 
+and service names may be trademarks or service marks of others.
+
+THIS DOCUMENT IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND.  
+WE DISCLAIM ALL WARRANTIES, WHETHER EXPRESS OR IMPLIED, 
+INCLUDING WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF FITNESS 
+FOR A PARTICULAR PURPOSE AND MERCHANTABILITY WITH RESPECT TO THE 
+INFORMATION IN THIS DOCUMENT.  BY FURNISHING THIS DOCUMENT, WEGRANT 
+NO LICENSES TO ANY PATENTS OR COPYRIGHTS.
+
+Copyright (c) Lenovo 2025, all rights reserved
+

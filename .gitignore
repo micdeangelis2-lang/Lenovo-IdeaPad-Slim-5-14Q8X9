@@ -1,0 +1,28 @@
+# Python virtual environment & caches
+.venv/
+__pycache__/
+*.pyc
+Microsoft/
+pip/
+
+# Generated ISO images, WIM/ESD files, and UUP temporary downloads
+*.iso
+*.ISO
+*.wim
+*.WIM
+*.esd
+*.ESD
+*.swm
+iso_builder/uup_pkg.zip
+iso_builder/uup_pkg/UUPs/
+iso_builder/uup_pkg/ISOFOLDER/
+iso_builder/uup_pkg/temp/
+iso_builder/uup_pkg/bin/
+iso_builder/uup_pkg/files/*.exe
+iso_builder/uup_pkg/files/*.7z
+iso_builder/uup_pkg/files/aria2_*.txt
+iso_builder/uup_pkg/*.log
+
+# Large extracted binary drivers & installers (>100MB GitHub limit; fetched by SCARICA_DRIVER_E_APP_ARM64.ps1)
+iso_builder/uup_pkg/Drivers/
+iso_builder/oem_apps/*.exe

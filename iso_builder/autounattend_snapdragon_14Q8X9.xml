@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<unattend xmlns="urn:schemas-microsoft-com:unattend" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State">
+  <!--
+    PROFILO ZERO-TELEMETRIA, ZERO-BLOAT & OTTIMIZZAZIONE QUALCOMM SNAPDRAGON X PLUS (ARM64)
+    Target: Lenovo IdeaPad Slim 5 14Q8X9 (Type 83HL) - Windows 11 26H2 ARM64
+    Copia questo file nella radice della chiavetta USB (accanto a setup.exe) rinominandolo in: autounattend.xml
+  -->
+  <settings pass="specialize">
+    <component name="Microsoft-Windows-Deployment" processorArchitecture="arm64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <RunSynchronous>
+        <!-- 1. Bypass totale obbligo Account Microsoft + Forza schermata creazione Account Locale (24H2/25H2/26H2) -->
+        <RunSynchronousCommand wcm:action="add">
+          <Order>1</Order>
+          <Path>reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OOBE" /v BypassNRO /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>19</Order>
+          <Path>reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OOBE" /v HideOnlineAccountScreens /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>20</Order>
+          <Path>reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Systems" /v AllowMSA /t REG_DWORD /d 0 /f</Path>
+        </RunSynchronousCommand>
+
+        <!-- 2. Disattiva Telemetria Windows & Raccolta Dati a livello Group Policy (0 = Security/Off) -->
+        <RunSynchronousCommand wcm:action="add">
+          <Order>2</Order>
+          <Path>reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v AllowTelemetry /t REG_DWORD /d 0 /f</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>3</Order>
+          <Path>reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v DoNotShowFeedbackNotifications /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>4</Order>
+          <Path>reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v DisableOneSettingsDownloads /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+
+        <!-- 3. Stop permanente dei Servizi di Telemetria (DiagTrack, dmwappushservice, WerSvc, MapsBroker) -->
+        <RunSynchronousCommand wcm:action="add">
+          <Order>5</Order>
+          <Path>sc.exe config DiagTrack start= disabled</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>6</Order>
+          <Path>sc.exe config dmwappushservice start= disabled</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>7</Order>
+          <Path>sc.exe config WerSvc start= disabled</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>8</Order>
+          <Path>sc.exe config PcaSvc start= demand</Path>
+        </RunSynchronousCommand>
+
+        <!-- 4. Disattiva ID Pubblicitario, Tailored Experiences, Ricerca Cloud Bing e Consumer Features -->
+        <RunSynchronousCommand wcm:action="add">
+          <Order>9</Order>
+          <Path>reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo" /v DisabledByGroupPolicy /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>10</Order>
+          <Path>reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableWindowsConsumerFeatures /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>11</Order>
+          <Path>reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableSoftLanding /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>12</Order>
+          <Path>reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v DisableSearchBoxSuggestions /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+
+        <!-- 5. Disattiva Windows Recall, Copilot e AI Data Analysis in background (NPU 45 TOPS libera) -->
+        <RunSynchronousCommand wcm:action="add">
+          <Order>13</Order>
+          <Path>reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI" /v DisableAIDataAnalysis /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>14</Order>
+          <Path>reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI" /v TurnOffSavingSnapshots /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>15</Order>
+          <Path>reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot" /v TurnOffWindowsCopilot /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+
+        <!-- 6. Disattiva Widget News & Interessi e Windows Error Reporting -->
+        <RunSynchronousCommand wcm:action="add">
+          <Order>16</Order>
+          <Path>reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Dsh" /v AllowNewsAndInterests /t REG_DWORD /d 0 /f</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>17</Order>
+          <Path>reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" /v Disabled /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+
+        <!-- 7. Disattiva crittografia automatica BitLocker Device Encryption durante OOBE (massima velocita' SSD NVMe) -->
+        <RunSynchronousCommand wcm:action="add">
+          <Order>18</Order>
+          <Path>reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\BitLocker" /v PreventDeviceEncryption /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+      </RunSynchronous>
+    </component>
+  </settings>
+
+  <settings pass="oobeSystem">
+    <component name="Microsoft-Windows-International-Core" processorArchitecture="arm64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <InputLocale>0410:00000410</InputLocale>
+      <SystemLocale>it-IT</SystemLocale>
+      <UILanguage>it-IT</UILanguage>
+      <UserLocale>it-IT</UserLocale>
+    </component>
+    <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="arm64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <OOBE>
+        <HideEULAPage>true</HideEULAPage>
+        <HideOnlineAccountScreens>true</HideOnlineAccountScreens>
+        <HideWirelessSetupInOOBE>false</HideWirelessSetupInOOBE>
+        <ProtectYourPC>3</ProtectYourPC>
+      </OOBE>
+      <FirstLogonCommands>
+        <!-- Disattiva Scheduled Tasks di telemetria Microsoft (Compatibility Appraiser, CEIP, ProgramDataUpdater) -->
+        <SynchronousCommand wcm:action="add">
+          <Order>1</Order>
+          <CommandLine>schtasks.exe /Change /TN "\Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /Disable</CommandLine>
+          <Description>Disattiva telemetria Compatibility Appraiser</Description>
+        </SynchronousCommand>
+        <SynchronousCommand wcm:action="add">
+          <Order>2</Order>
+          <CommandLine>schtasks.exe /Change /TN "\Microsoft\Windows\Application Experience\ProgramDataUpdater" /Disable</CommandLine>
+          <Description>Disattiva ProgramDataUpdater</Description>
+        </SynchronousCommand>
+        <SynchronousCommand wcm:action="add">
+          <Order>3</Order>
+          <CommandLine>schtasks.exe /Change /TN "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /Disable</CommandLine>
+          <Description>Disattiva CEIP Consolidator</Description>
+        </SynchronousCommand>
+        <SynchronousCommand wcm:action="add">
+          <Order>4</Order>
+          <CommandLine>schtasks.exe /Change /TN "\Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" /Disable</CommandLine>
+          <Description>Disattiva USB CEIP</Description>
+        </SynchronousCommand>
+        <SynchronousCommand wcm:action="add">
+          <Order>5</Order>
+          <CommandLine>schtasks.exe /Change /TN "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" /Disable</CommandLine>
+          <Description>Disattiva DiskDiagnosticDataCollector</Description>
+        </SynchronousCommand>
+        <SynchronousCommand wcm:action="add">
+          <Order>6</Order>
+          <CommandLine>powercfg.exe /hibernate off</CommandLine>
+          <Description>Disattiva ibernazione su disco per risparmiare scritture NVMe e 16GB di spazio</Description>
+        </SynchronousCommand>
+        <SynchronousCommand wcm:action="add">
+          <Order>7</Order>
+          <CommandLine>reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v SilentInstalledAppsEnabled /t REG_DWORD /d 0 /f</CommandLine>
+          <Description>Blocca app silenziose dello Store</Description>
+        </SynchronousCommand>
+        <SynchronousCommand wcm:action="add">
+          <Order>8</Order>
+          <CommandLine>reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Privacy" /v TailoredExperiencesWithDiagnosticDataEnabled /t REG_DWORD /d 0 /f</CommandLine>
+          <Description>Disattiva esperienze personalizzate con dati diagnostici</Description>
+        </SynchronousCommand>
+        <SynchronousCommand wcm:action="add">
+          <Order>9</Order>
+          <CommandLine>cmd.exe /c "if exist %SystemDrive%\Windows\Temp\OEM_Apps\INSTALLA_APP_DEFAULT.cmd call %SystemDrive%\Windows\Temp\OEM_Apps\INSTALLA_APP_DEFAULT.cmd"</CommandLine>
+          <Description>Installa 7-Zip ARM64, Brave Browser ARM64, VLC ARM64, Notepad++ ARM64 e rimuove Edge/WinZip</Description>
+        </SynchronousCommand>
+      </FirstLogonCommands>
+    </component>
+  </settings>
+</unattend>
