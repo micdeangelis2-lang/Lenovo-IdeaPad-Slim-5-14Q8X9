@@ -1,7 +1,9 @@
 # Implementation Plan - Lenovo IdeaPad Slim 5 14Q8X9 Hardware Checkup Suite
 
 ## 1. Overview & Architecture
-- **[ENTERPRISE-ARCHITECT]** Modular Monolith Web Dashboard (FastAPI/Python Standard HTTP + Vanilla JS/HTML5 Modern UI) executable directly on the target Lenovo IdeaPad Slim 5 14Q8X9 (Snapdragon X Plus ARM64 / Windows 11) or local workstation.
+- **[ENTERPRISE-ARCHITECT]** Dual-Runtime Modular Monolith Web Dashboard:
+  1. **Standalone Go Native Executables (`main.go` -> `LenovoCheckup_ARM64.exe` & `LenovoCheckup_x64.exe`):** Single-file portable binaries (`//go:embed frontend/*`) requiring zero Python/Node installation.
+  2. **Python `.venv` Reference Backend (`backend/server.py`, `backend/diagnostics.py`):** Identical REST API (`/api/diagnostics`, `/api/live`).
 - **Zero-External-Bloat Strategy:** Uses native Windows CIM/WMI, `powercfg`, `Get-PhysicalDisk`, `Get-PnpDevice`, and HTML5 Web APIs (`navigator.mediaDevices`, `AudioContext`, Fullscreen Canvas, Keyboard/Gamepad/Touch events) so it runs offline or out-of-the-box on a freshly arrived used laptop.
 
 ## 2. Diagnostic Modules

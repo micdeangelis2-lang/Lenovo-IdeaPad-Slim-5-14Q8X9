@@ -31,8 +31,18 @@ Suite diagnostica completa progettata per ispezionare un **Lenovo IdeaPad Slim 5
 
 ## Come installare (`How to install`)
 
-Requisiti: **Windows 10 / 11** (compatibile sia con **ARM64 Snapdragon X Plus** sia con x64) e **Python 3.10+**.
+### Opzione A: Zero installazione (Eseguibili compilati in Go)
+Il progetto include già gli eseguibili **standalone compilati in Go** (con tutta la dashboard HTML/CSS/JS incorporata nel binario tramite `//go:embed`):
+- **[`LenovoCheckup_ARM64.exe`](file:///D:/Lenovo-IdeaPad-Slim-5-14Q8X9/LenovoCheckup_ARM64.exe)** (6.3 MB) — Nativo per **Lenovo IdeaPad Slim 5 14Q8X9 (Snapdragon X Plus ARM64)**, non richiede Python né dipendenze esterne! *(Viene anche copiato automaticamente sul Desktop al primo avvio della ISO 26H2).*
+- **[`LenovoCheckup_x64.exe`](file:///D:/Lenovo-IdeaPad-Slim-5-14Q8X9/LenovoCheckup_x64.exe)** (6.9 MB) — Nativo per PC Windows x64 tradizionali.
 
+Per ricompilarli da sorgente ([`main.go`](file:///D:/Lenovo-IdeaPad-Slim-5-14Q8X9/main.go)):
+```powershell
+$env:GOOS="windows"; $env:GOARCH="arm64"; go build -ldflags="-s -w" -o LenovoCheckup_ARM64.exe main.go
+$env:GOOS="windows"; $env:GOARCH="amd64"; go build -ldflags="-s -w" -o LenovoCheckup_x64.exe main.go
+```
+
+### Opzione B: Ambiente Python (`.venv`)
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
@@ -40,9 +50,9 @@ python -m venv .venv
 
 ## Come usare (`How to use`)
 
-### Metodo 1: Doppio click (Consigliato)
-Fai doppio click sul file **[`AVVIA_CHECKUP.bat`](file:///D:/Lenovo-IdeaPad-Slim-5-14Q8X9/AVVIA_CHECKUP.bat)**.
-Lo script avvierà il server locale e aprirà automaticamente il browser su `http://127.0.0.1:8765`.
+### Metodo 1: Doppio click diretto sull'eseguibile Go o sul launcher
+- Sul Lenovo Snapdragon X Plus fai doppio click direttamente su **[`LenovoCheckup_ARM64.exe`](file:///D:/Lenovo-IdeaPad-Slim-5-14Q8X9/LenovoCheckup_ARM64.exe)** (oppure su **[`AVVIA_CHECKUP.bat`](file:///D:/Lenovo-IdeaPad-Slim-5-14Q8X9/AVVIA_CHECKUP.bat)** che riconosce automaticamente l'architettura ARM64/x64 e avvia il binario Go corrispondente).
+- Il programma avvierà il server locale e aprirà automaticamente il browser su `http://127.0.0.1:8765`.
 
 ### Metodo 2: Da terminale PowerShell
 ```powershell

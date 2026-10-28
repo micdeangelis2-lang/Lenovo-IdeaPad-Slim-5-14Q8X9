@@ -4,6 +4,7 @@
 - **Target Device:** Lenovo IdeaPad Slim 5 14Q8X9 (Snapdragon X Plus, Windows 11 ARM64) - Used/Refurbished unit inspection.
 - **Status:** Completed and verified.
 - **Architecture:**
+  - `main.go` & `go.mod`: Standalone Go application (`//go:embed frontend/*`) compiled into native zero-dependency executables **`LenovoCheckup_ARM64.exe`** (for Snapdragon X Plus) and **`LenovoCheckup_x64.exe`** (for x64 PCs).
   - `backend/diagnostics.py`: Collects WMI/CIM hardware telemetry, runs `powercfg /batteryreport /xml` for exact battery wear/cycles, queries `Get-PhysicalDisk` + `Get-StorageReliabilityCounter` for NVMe SMART health, and inspects `Get-PnpDevice` for driver errors and Snapdragon X Plus subsystems (NPU, FastConnect 7800, Camera, Audio, Biometrics, USB4).
   - `backend/server.py`: Zero-dependency multi-threaded HTTP server on port `8765` serving `/api/diagnostics`, `/api/live`, and the static frontend.
   - `frontend/`: Interactive dark-mode diagnostic bench for Display (OLED burn-in / dead pixels), Keyboard matrix, Touchpad precision/scroll, Webcam FHD, Stereo Speakers (L/R/Sweep), Dual-Array Microphone FFT, and 10-point physical inspection checklist.

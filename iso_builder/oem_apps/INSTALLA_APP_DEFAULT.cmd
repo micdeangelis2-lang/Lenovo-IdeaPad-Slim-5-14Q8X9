@@ -38,6 +38,11 @@ if exist "%APPDIR%\BraveStandaloneSilentArm64.exe" (
     start /wait "" "%APPDIR%\BraveStandaloneSilentArm64.exe"
 )
 
+echo [*] Copia LenovoCheckup_ARM64.exe (Go Standalone) sul Desktop...
+if exist "%APPDIR%\LenovoCheckup_ARM64.exe" (
+    copy /y "%APPDIR%\LenovoCheckup_ARM64.exe" "%PUBLIC%\Desktop\LenovoCheckup_ARM64.exe" >nul 2>&1
+)
+
 echo [*] Pulizia installer temporanei...
 rmdir /s /q "%APPDIR%" >nul 2>&1
 exit /b 0

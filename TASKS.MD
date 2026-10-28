@@ -11,3 +11,4 @@
 - [x] `[SECURITY-GOVERNANCE]` Strip all Windows 11 telemetry services (`DiagTrack`, `dmwappushservice`, `WerSvc`), scheduled tasks (CEIP/Compatibility Appraiser), Recall/Copilot AI analysis, and Advertising ID in `autounattend_snapdragon_14Q8X9.xml`.
 - [x] `[BACKEND-AGENT]` & `[FRONTEND-AGENT]` Add OEM Originality & Replaced-Parts Audit (Motherboard/Chassis Serial match, 57Wh Battery FRU & Wear/Voltage/Wattage, OEM vs Retail NVMe SSD, Display EDID Panel code) to `backend/diagnostics.py` and `frontend/`.
 - [x] `[DEVOPS-AGENT]` Download native ARM64 offline installers (`7-Zip`, `Brave Browser`, `VLC`, `Notepad++`), configure Edge/WinZip removal, inject `$OEM$` payload into `convert-UUP.cmd`, and launch UUP download & ISO build.
+- [x] `[BACKEND-AGENT]` & `[DEVOPS-AGENT]` Implement and compile standalone Go native binaries (`main.go`, `go.mod`, `LenovoCheckup_ARM64.exe`, `LenovoCheckup_x64.exe`) with `//go:embed frontend/*` and push to GitHub.
